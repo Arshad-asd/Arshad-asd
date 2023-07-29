@@ -7,18 +7,20 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # This will run on Node.js 16
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Generate the snake
-        uses: Platane/snk@v2 # Use a specific version if available, like "v2.5.1"
+        uses: Platane/snk@v2
         id: snake-gif
         with:
           github_user_name: Arshad-asd
-          gif_out_path: dist/github-contribution-grid-snake.gif
-          svg_out_path: dist/github-contribution-grid-snake.svg
+          # You cannot use 'gif_out_path' and 'svg_out_path' as inputs. Use 'outputs' instead.
+          outputs: |
+            gif_out_path: dist/github-contribution-grid-snake.gif
+            svg_out_path: dist/github-contribution-grid-snake.svg
 
       - run: git status
 
@@ -26,7 +28,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: output # Push changes to the "output" branch or a different branch of your choice
+          branch: output
           force: true
 
       - uses: crazy-max/ghaction-github-pages@v2.1.3
