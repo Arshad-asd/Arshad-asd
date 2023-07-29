@@ -7,9 +7,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest # This will run on Node.js 16
+    runs-on: ubuntu-latest
 
     steps:
+      - name: Set up Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+
       - uses: actions/checkout@v2
 
       - name: Generate the snake
@@ -17,7 +22,6 @@ jobs:
         id: snake-gif
         with:
           github_user_name: Arshad-asd
-          # You cannot use 'gif_out_path' and 'svg_out_path' as inputs. Use 'outputs' instead.
           outputs: |
             gif_out_path: dist/github-contribution-grid-snake.gif
             svg_out_path: dist/github-contribution-grid-snake.svg
